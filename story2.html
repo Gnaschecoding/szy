@@ -1,0 +1,86 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+</script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>无声夜晚中的坚韧母爱 - 妈妈们的故事</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+  <section class="py-20 px-4 bg-gradient-to-b from-blue-100 to-gray-50">
+    <div class="container mx-auto max-w-3xl">
+      <a href="index.html" class="text-blue-600 hover:underline mb-6 inline-block">&larr; 返回故事列表</a>
+      <div class="bg-white rounded-xl shadow-lg p-8">
+        <img src="./s22.jpg" alt="妈妈的故事" class="w-full h-64 object-contain rounded-lg mb-6">
+        <h1 class="text-3xl font-bold mb-4 text-gray-800">无声夜晚中的坚韧母爱</h1>
+        <p class="text-gray-500 mb-6">李女士，30岁，一个孩子的妈妈</p>
+        <p class="text-gray-700 mb-4">
+          我们走近了 30 岁、初为人母的李女士，倾听她产后那些无声却又刻骨铭心的夜晚。
+        </p>
+        <p class="text-gray-700 mb-4">
+          李女士回忆，产后的夜晚充满了难以言说的疼痛。有时半夜疼得无法翻身，可即便如此，她也强忍着，不敢发出一丝声响，害怕吵醒身旁熟睡的孩子。那种身体上的疼痛与对孩子深深的爱交织在一起，让她在脆弱中更显坚韧。
+        </p>
+        <p class="text-gray-700 mb-4">
+          当谈及那段经历时，李女士眼中泛着泪光却又满是温柔：“看着孩子的笑脸，一切都值得。” 孩子的每一个笑容，每一声啼哭，都成了她坚持下去的动力。李女士的故事，深刻诠释了母爱的无私与深沉，即便在最艰难的时刻，母亲们也会为了孩子默默承受，用柔弱的身躯撑起一片温暖的港湾。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audio Player -->
+  <div class="fixed bottom-4 right-4 z-50 bg-white/80 backdrop-blur-md rounded-full p-3 shadow-lg audio-player">
+    <audio id="backgroundMusic" loop>
+      <source src="./motherly_love.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggleButton" class="text-primary hover:text-primary/80 transition-colors relative music-symbol">
+      <i class="fa-solid fa-music text-2xl"></i>
+    </button>
+  </div>
+
+  <script src="audio.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93d014d4a9e77cc4',t:'MTc0Njc4MjAxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

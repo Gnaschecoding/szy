@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>身体记忆 - 生育伤痕科普</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="font-inter bg-gradient-to-b from-light to-secondary min-h-screen text-dark">
+  <!-- 导航栏 -->
+  <nav class="fixed w-full bg-white/80 backdrop-blur-md z-50 transition-all duration-300 shadow-md" id="navbar">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-primary font-bold text-xl flex items-center">
+        <i class="fa-solid fa-heartbeat mr-2"></i>
+        <span>身体记忆</span>
+      </a>
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="text-dark hover:text-primary transition-colors duration-300">首页</a>
+        <a href="#interactive" class="text-dark hover:text-primary transition-colors duration-300">探索</a>
+        <a href="#stories" class="text-dark hover:text-primary transition-colors duration-300">故事</a>
+        <a href="#awareness" class="text-dark hover:text-primary transition-colors duration-300">结语</a>
+      </div>
+      <button class="md:hidden text-primary text-2xl" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <!-- 移动端菜单 -->
+    <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobileMenu">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+        <a href="#home" class="text-dark hover:text-primary transition-colors duration-300 py-2">首页</a>
+        <a href="#interactive" class="text-dark hover:text-primary transition-colors duration-300 py-2">探索</a>
+        <a href="#stories" class="text-dark hover:text-primary transition-colors duration-300 py-2">故事</a>
+        <a href="#awareness" class="text-dark hover:text-primary transition-colors duration-300 py-2">结语</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <section id="home" class="pt-32 pb-20 px-4 relative overflow-hidden">
+    <div class="container mx-auto text-center">
+      <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold mb-6 text-dark relative inline-block" id="title">
+        身体记忆：那些妈妈从不说出口的<span class="relative" id="scarsText">生育伤痕</span>
+      </h1>
+      <p class="text-[clamp(1rem,2vw,1.25rem)] max-w-3xl mx-auto mb-10 text-dark/80">
+        每个生命的诞生都伴随着母亲的付出，那些看不见的伤痕，是爱的印记
+      </p>
+      <button class="bg-primary hover:bg-primary/90 text-white py-3 px-8 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" id="startButton">
+        开始探索 <i class="fa-solid fa-arrow-down ml-2"></i>
+      </button>
+    </div>
+
+    <!-- 装饰元素 -->
+    <div class="absolute top-1/4 -left-10 w-20 h-20 bg-primary/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 -right-10 w-32 h-32 bg-secondary/30 rounded-full blur-3xl"></div>
+  </section>
+
+  <!-- 交互区域 -->
+  <section id="interactive" class="py-20 px-4 bg-white/50 backdrop-blur-sm">
+    <div class="container mx-auto">
+      <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-12 text-center text-dark">母亲身体的秘密</h2>
+
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <!-- 交互人体图像 -->
+        <div class="w-full lg:w-1/2 perspective-1000 relative h-[700px] md:h-[800px]" id="bodyContainer">
+          <div class="relative w-full h-full mx-auto" style="max-width: 500px;">
+            <!-- 孕前状态 -->
+            <div class="absolute w-full h-full opacity-100 transition-opacity duration-1000" id="prePregnancy">
+              <img src="./qian.jpg" alt="孕前母亲形象" class="w-full h-full object-contain">
+            </div>
+            
+            <!-- 孕后状态 -->
+            <div class="absolute w-full h-full opacity-0 transition-opacity duration-1000" id="postPregnancy">
+              <img src="./gravida.jpg" alt="孕后母亲形象" class="w-full h-full object-contain">
+              
+              <!-- 腹部交互区域 -->
+              <div class="absolute top-[60%] left-1/2 transform -translate-x-1/2 w-32 h-32 cursor-pointer rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-300 flex items-center justify-center scale-up-hover" id="abdomenArea" style="left: 66%;">
+                <span class="text-primary font-medium">点击查看</span>
+              </div>
+              
+              <!-- 腰部交互区域 -->
+              <div class="absolute top-[55%] left-1/2 transform -translate-x-1/2 w-28 h-20 cursor-pointer rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-300 flex items-center justify-center scale-up-hover" id="lowerBackArea" style="left: 30%;">
+                <span class="text-primary font-medium">点击查看</span>
+              </div>
+              
+              <!-- 牙齿交互区域 -->
+              <div class="absolute top-[28%] left-1/2 transform -translate-x-1/2 w-16 h-12 cursor-pointer rounded-full bg-primary/10 hover:bg-primary/20 transition-all duration-300 flex items-center justify-center scale-up-hover" id="teethArea" style="left: 55%;">
+                <span class="text-primary font-medium">点击查看</span>
+              </div>
+              
+              <!-- 妊娠纹 -->
+              <div class="stretch-mark" id="stretchMark1" style="width: 40px; height: 4px; top: 42%; left: 45%; transform: rotate(15deg);"></div>
+              <div class="stretch-mark" id="stretchMark2" style="width: 35px; height: 4px; top: 45%; left: 50%; transform: rotate(-10deg);"></div>
+              <div class="stretch-mark" id="stretchMark3" style="width: 45px; height: 4px; top: 47%; left: 43%; transform: rotate(5deg);"></div>
+              
+              <!-- 脊柱弯曲效果 -->
+              <div class="absolute top-[35%] left-1/2 w-1 h-1/2 bg-gray-400 rounded-full spine-curve" id="spine" style="transform: translateX(-50%);"></div>
+              
+              <!-- 牙齿裂痕 -->
+              <div class="tooth-crack" id="toothCrack1" style="width: 2px; height: 10px; top: 19%; left: 48%; transform: rotate(10deg);"></div>
+              <div class="tooth-crack" id="toothCrack2" style="width: 2px; height: 8px; top: 20%; left: 50%; transform: rotate(-15deg);"></div>
+            </div>
+            
+            <!-- 状态切换按钮 -->
+            <button class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-primary/80 hover:bg-primary text-white py-2 px-4 rounded-full text-sm transition-all duration-300" id="toggleState">
+              切换孕前/孕后状态
+            </button>
+          </div>
+        </div>
+        
+        <!-- 信息卡片 -->
+        <div class="w-full lg:w-1/2" id="infoCard">
+          <div class="bg-white rounded-2xl shadow-xl p-8 h-full opacity-0 transform translate-y-8 transition-all duration-500" id="cardContent">
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="text-2xl font-bold text-dark" id="cardTitle">点击左侧身体部位探索</h3>
+              <button class="text-gray-400 hover:text-primary transition-colors" id="closeCard">
+                <i class="fa-solid fa-times text-xl"></i>
+              </button>
+            </div>
+            
+            <div class="mb-6">
+              <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden mb-2" id="progressBar">
+                <div class="bg-primary h-full w-0 transition-all duration-1000"></div>
+              </div>
+              <p class="text-sm text-gray-500" id="progressText">请点击左侧身体部位</p>
+            </div>
+            
+            <div class="mb-6 max-w-xl" id="cardImageContainer">
+              <img src="./gai.jpg" alt="生育健康信息" class="w-full h-full h-40 md:h-120 object-cover rounded-xl" id="cardImage">
+            </div>
+            
+            <div class="space-y-4" id="cardInfo">
+              <p class="text-gray-700" id="cardDescription">
+                每个母亲的身体都会经历独特的变化和挑战。点击左侧的腹部、腰部或牙齿区域，了解更多关于生育对身体影响的知识。
+              </p>
+              
+              <div class="hidden" id="collagenFiberAnimation">
+                <div class="w-full h-20 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                  <div class="w-3/4 h-4 bg-gray-300 rounded-full relative">
+                    <div class="absolute top-0 left-0 h-full w-1/2 bg-green-400 rounded-l-full transition-all duration-200" id="collagenFiber"></div>
+                    <div class="absolute top-0 left-1/2 h-full w-0 bg-red-400 rounded-r-full transition-all duration-200" id="brokenCollagen"></div>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-600 italic">点击播放动画：胶原纤维断裂过程</p>
+              </div>
+              
+              <div class="hidden" id="spineAnimation">
+                <div class="w-full h-32 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                  <div class="w-24 h-24 relative">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-20 bg-gray-400 rounded-full" id="spineStraight"></div>
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-20 bg-gray-400 rounded-full opacity-0" id="spineCurved" style="transform: translateX(-50%) rotate(15deg); transform-origin: center bottom;"></div>
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-gray-300 rounded-full" id="pelvis"></div>
+                    <div class="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary/20 rounded-full" id="baby"></div>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-600 italic">点击播放动画：孕期脊柱变化</p>
+              </div>
+              
+              <div class="hidden" id="calciumLossChart">
+                <div class="w-full h-48 mb-4">
+                  <canvas id="calciumChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-600 italic">孕期钙流失与母体健康关系图</p>
+              </div>
+              
+              <div class="mt-6 pt-6 border-t border-gray-200">
+                <h4 class="font-semibold text-dark mb-2">关键数据</h4>
+                <ul class="space-y-2" id="cardStats">
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-circle-check text-primary mt-1 mr-2"></i>
+                    <span class="text-gray-700">86%的孕妇会产生妊娠纹</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-circle-check text-primary mt-1 mr-2"></i>
+                    <span class="text-gray-700">36%的产妇会出现腰椎间盘突出</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa-solid fa-circle-check text-primary mt-1 mr-2"></i>
+                    <span class="text-gray-700">胎儿需从母体吸收约30g钙质</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 故事分享区域 -->
+  <section id="stories" class="py-20 px-4 bg-gradient-to-b from-blue-100 to-gray-50">
+    <div class="container mx-auto">
+      <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-12 text-center text-gray-800">妈妈们的故事</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 故事卡片1 -->
+        <a href="story1.html" class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 scale-up-hover">
+          <div class="h-48 overflow-hidden">
+            <img src="./s1.jpg" alt="妈妈的故事" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-xl mb-3 text-gray-800">《腰痛背后的母爱坚守 —— 睢女士》</h3>
+            <p class="text-gray-700 mb-4">
+              "原本活力满满的她，在经历一次生育后，身体发生了不小的变化，其中最让她困扰的就是腰痛。"
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span>睢女士，28岁，一个孩子的妈妈</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- 故事卡片2 -->
+        <a href="story2.html" class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 scale-up-hover">
+          <div class="h-48 overflow-hidden">
+            <img src="./s2.jpg" alt="妈妈的故事" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-xl mb-3 text-gray-800">《无声夜晚中的坚韧母爱 —— 李女士》</h3>
+            <p class="text-gray-700 mb-4">
+              "半夜疼得翻不了身，怕吵醒孩子。那种疼痛让我觉得自己很脆弱，但看着孩子的笑脸，一切都值得。"
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span>李女士，30岁，一个孩子的妈妈</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- 故事卡片3 -->
+        <a href="story3.html" class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 scale-up-hover">
+          <div class="h-48 overflow-hidden">
+            <img src="./s3.jpg" alt="妈妈的故事" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-xl mb-3 text-gray-800">《产后体重之困 —— 张女士》</h3>
+            <p class="text-gray-700 mb-4">
+             “刚生完第一个孩子的时候，我就发现体重比孕前重了不少。原本想着等身体恢复恢复，慢慢就能瘦下来，可谁知道，后来又陆续有了二宝，体重就像坐了火箭，一直往上蹿。”
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span>张女士，35岁，两个孩子的妈妈</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 情感升华区域 -->
+  <section id="awareness" class="py-24 px-4 bg-dark text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20"></div>
+    
+    <div class="container mx-auto relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-8 animate-fade-in">那些说不出口的痛，值得被看见</h2>
+        
+        <div class="relative h-64 mb-10 overflow-hidden rounded-xl">
+          <div class="absolute inset-0 bg-black/30 z-10"></div>
+          <img src="./s4.jpg" alt="母亲与孩子" class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center z-20">
+            <p class="text-[clamp(1.2rem,2vw,1.8rem)] font-medium text-white text-shadow px-4">
+              "我们曾在她身体里攻城略地<br>她却笑着说这是最甜蜜的伤痕"
+            </p>
+          </div>
+        </div>
+        
+        <p class="text-[clamp(1rem,2vw,1.25rem)] mb-10 text-white/90">
+          每一位母亲都值得被温柔对待。
+        </p>
+        <p class="text-[clamp(1rem,2vw,1.25rem)] mb-10 text-white/90">
+         了解生育对身体的影响，是我们给予她们关爱的第一步。
+        </p>
+
+        
+        <!-- 康乃馨覆盖效果区域 -->
+        <div class="relative h-24 mb-8" id="carnationContainer">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="text-3xl font-bold text-white" id="scarsTextFinal">生育伤痕</span>
+          </div>
+        </div>
+        
+        <p class="text-white/80">
+          让我们一起关注母亲健康，用爱和理解治愈那些看不见的伤痛。
+        </p>
+      </div>
+    </div>
+    
+    <!-- 装饰元素 -->
+    <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-primary/30 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/4 -right-20 w-60 h-60 bg-secondary/30 rounded-full blur-3xl"></div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark/90 text-white/70 py-10 px-4">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-white font-bold text-xl flex items-center">
+            <i class="fa-solid fa-heartbeat mr-2"></i>
+            <span>身体记忆</span>
+          </a>
+          <p class="mt-2 text-sm">关注母亲健康，传递爱与理解</p>
+        </div>
+       
+
+        
+        <div class="text-sm">
+		  <p>© 指导老师：徐琼</p>
+          <p>© 制作：宋振羽 阿尔纳尔 王晨晖</p>
+        </div>
+		
+      </div>
+    </div>
+  </footer>
+  
+  
+    <!-- Audio Player -->
+  <div class="fixed bottom-4 right-4 z-50 bg-white/80 backdrop-blur-md rounded-full p-3 shadow-lg audio-player">
+    <audio id="backgroundMusic" loop>
+      <source src="./motherly_love.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <button id="musicToggleButton" class="text-primary hover:text-primary/80 transition-colors relative music-symbol">
+      <i class="fa-solid fa-music text-2xl"></i>
+    </button>
+  </div>
+  
+  
+  <script src="script.js"></script>
+</body>
+</html>

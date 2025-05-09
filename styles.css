@@ -1,0 +1,106 @@
+/* Tailwind configuration */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  .scale-up-hover {
+    transition: transform 0.3s ease;
+  }
+  .scale-up-hover:hover {
+    transform: scale(1.03);
+  }
+  .audio-player {
+    transition: all 0.3s ease;
+  }
+  .audio-player:hover {
+    transform: scale(1.05);
+  }
+  .music-symbol {
+    animation: rotateMusic 4s linear infinite;
+    position: relative;
+  }
+  .music-symbol.muted::before {
+    content: '\f05e'; /* Font Awesome 'ban' icon for slash */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    color: #FF5C8D; /* Match primary color */
+    font-size: 1.5rem;
+    opacity: 0.8;
+  }
+  .music-symbol.paused {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes rotateMusic {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.carnation {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1.5s ease-out;
+}
+
+.stretch-mark {
+  position: absolute;
+  background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.9));
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 1s ease;
+}
+
+.spine-curve {
+  transition: all 1s ease-out;
+}
+
+.tooth-crack {
+  position: absolute;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
